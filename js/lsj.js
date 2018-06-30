@@ -38,9 +38,6 @@ $(document).ready(function () {
         $('#cookieHolder').show();
     }
 
-    //Start to prepare the conversion data
-    initConversion();
-
     //Load the result template
     $.get('templates/result.html', function (data) {
         RESULT_TEMPLATE = data;
@@ -95,7 +92,7 @@ function search(query, limit) {
     //If query is no length, query an asterisk
     if (query.length < 1) query = "*";
     //Translate the query into ASCII
-    query = convertASCII(query);
+    //query = convertASCII(query);
     let limitLemmata = $('#limitLemmata').attr('checked');
     //Send the query to the server
     $.get("search.php?q=" + query + "&m=" + limit + "&l=" + (limitLemmata == 'true'), function (data) {
@@ -113,9 +110,9 @@ function search(query, limit) {
                 if (parts.length < 3) continue;
                 //Add new result
                 results.push({
-                    id: parts[1],
-                    lemma: parts[2],
-                    lemmaASCII: parts[0],
+                    id: parts[0],
+                    lemma: parts[1],
+                    lemmaASCII: parts[1],
                 });
                 //Now shows the results
                 showResults(results, query);
@@ -147,7 +144,7 @@ function showResults(results, query) {
     $('#resultHolder').html(lines.join(''));
 
     //Add a copy listener to all id's
-    $('.badge-info').click(function () {
+    $('.badge-warning').click(function () {
         copyTextToClipboard($(this).text());
         var backup = $(this).html();
         var self = this;
@@ -163,9 +160,9 @@ function showResults(results, query) {
         $(this).unbind('mouseover');
     }).click(function(){
         if($(this).text() == "Show more"){
-            $(this).html("Hide").removeClass('badge-secondary').addClass('badge-primary');
+            $(this).html("Hide").removeClass('badge-secondary').addClass('badge-danger');
         }else{
-            $(this).html("Show More").removeClass('badge-primary').addClass('badge-secondary');
+            $(this).html("Show More").removeClass('badge-danger').addClass('badge-secondary');
         }
     });
 
