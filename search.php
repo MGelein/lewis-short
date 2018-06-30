@@ -31,7 +31,7 @@ echo round((microtime(true) * 1000)) . "\n";
 /**Switch file depending on the provided parameter.
  * IGNORE FOR NOW, may add back later?
 */
-$file = 'data/lsj-ascii-unaccented.cex';
+$file = 'data/lewis-short-brief.cex';
 
 //Read through the file using an iterator
 $handle = fopen($file, 'r');
