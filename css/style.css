@@ -5,12 +5,12 @@ body{
     width: 100vw;
     height: 100vh;
     overflow-x: hidden;
-    background-image: url(lsjbg.jpg);
+    background-image: url(lsbg.jpg);
     background-attachment: fixed;
     background-size: fill;
 }
 
-/**
+/** 
 BOOTSTRAP OVERRIDES
 **/
 .row.main{
