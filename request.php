@@ -10,7 +10,7 @@ if(!isset($_GET['id'])){
 $id = $_GET['id'];
 
 //Get a handle to the file and read through it
-$handle = fopen('data/lsj-combined.cex', 'r');
+$handle = fopen('data/lewis-short.cex', 'r');
 $idNr = str_replace('n', '', $id);
 $idNr -= 100;
 //Read every line

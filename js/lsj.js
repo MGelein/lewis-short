@@ -107,12 +107,11 @@ function search(query, limit) {
             for (var i = 0; i < lines.length; i++) {
                 let parts = lines[i].split("#");
                 //Ignore empty lines
-                if (parts.length < 3) continue;
+                if (parts.length < 2) continue;
                 //Add new result
                 results.push({
-                    id: parts[0],
-                    lemma: parts[1],
-                    lemmaASCII: parts[1],
+                    id: parts[1].replace(/\s/, ''),
+                    lemma: parts[0],
                 });
                 //Now shows the results
                 showResults(results, query);
@@ -197,7 +196,9 @@ function allowCookies(allow){
  */
 function request(id){
     $.get('request.php?id=' + id, function(data){
+        id = id.replace(/\s/, '');
         $('#' + id + "Collapse .card-text").html(decorate(data.split('#')[3]));
+        console.log($('#' + id + "Collapse"));
     });
 }
 
@@ -214,7 +215,7 @@ function decorate(text) {
     //Empty query means nothing to highlight
     if (query.length < 1 || query == "*") return text;
     //Now perform the regex
-    text = text.replace(new RegExp(query, 'gi'), "<span class='bg-info'>" + query + "</span>");
+    text = text.replace(new RegExp(query, 'gi'), "<span class='bg-warning'>" + query + "</span>");
     return text;
 }
 
